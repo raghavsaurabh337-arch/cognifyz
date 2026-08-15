@@ -30,12 +30,12 @@
 
         <tbody>
 
-            {% for item in data %}
+            {% for item in recodes %}
             <tr>
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.email }}</td>
-                <td>{{ item.phone }}</td>
+                <td>{{ item.message }}</td>
             </tr>
             {% empty %}
             <tr>

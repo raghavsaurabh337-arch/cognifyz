@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from Api import views
+from Api.views import GCrecode,RUDrecodeAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
-    path('view/',views.view,name='view')
+    path('view/',views.view,name='view'),
+    path('API/recode/',GCrecode.as_view(),name='GCrecode'), 
+    path('API/recode/<int:pk>/', RUDrecodeAPI.as_view(), name='RUDrecode'),
 ]

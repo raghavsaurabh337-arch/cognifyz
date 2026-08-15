@@ -1,13 +1,45 @@
 from django.shortcuts import render,redirect
-from .models import home
-from .serializers import homeSerializer
+from .models import recode
+from .serializers import recodeSerializer
 from rest_framework.viewsets import  ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.mixins import ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin
+from rest_framework.generics import GenericAPIView
 
 
 # Create your views here.
 def home(request):
+     if request.method=="POST":
+          name=request.POST['name']
+          email=request.POST['email']
+          message=request.POST['message']
+          recode.objects.create(name=name, email=email, message=message)
      return render(request,'home.html')
 def view(request):
-     return render(request,'views.html')
+     recodes =recode.objects.all()
+     return render(request,'views.html',{"recodes":recodes})
+
+
+class GCrecode(ListModelMixin,CreateModelMixin,GenericAPIView):
+     queryset=recode.objects.all()
+     serializer_class=recodeSerializer
+     def get(self,request,*args,**kwargs):
+          return self.list(request,*args,**kwargs)
+     def post(self,request,*args,**kwargs):
+          return self.create(request,*args,**kwargs)
+class RUDrecodeAPI(RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin,GenericAPIView):
+     queryset=recode.objects.all()
+     serializer_class=recodeSerializer
+     def get(self, request, *args, **kwargs):
+          return self.retrieve(request, *args, **kwargs)
+
+     def put(self, request, *args, **kwargs):
+          return self.update(request, *args, **kwargs)
+
+     def patch(self, request, *args, **kwargs):
+          return self.partial_update(request, *args, **kwargs)
+
+     def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
