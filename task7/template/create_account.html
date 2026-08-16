@@ -1,0 +1,143 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <!-- Google Login -->
+    <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 350px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .or {
+            text-align: center;
+            margin: 20px 0;
+            color: #777;
+        }
+
+        .google {
+            display: flex;
+            justify-content: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Create Account</h2>
+
+    <!-- Normal Signup -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text"
+               name="name"
+               placeholder="Enter Name"
+               required>
+
+        <input type="email"
+               name="email"
+               placeholder="Enter Email"
+               required>
+
+        <input type="password"
+               name="password"
+               placeholder="Enter Password"
+               required>
+
+        <button type="submit">
+            Create Account
+        </button>
+    </form>
+
+    <div class="or">
+        OR
+    </div>
+
+    <!-- ---Google Sign In -->
+    <div class="google">
+        <div id="g_id_onload"
+             data-client_id="1007255392818-1v8k0m84da791vequplnh0tf25lc2qof.apps.googleusercontent.com"
+             data-login_uri="http://127.0.0.1:8000/google-login/"
+             data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="continue_with"
+             data-shape="rectangular"
+             
+             data-logo_alignment="left">
+        </div>
+    </div>
+
+    <p>
+    <a href="{% provider_login_url 'google' %}">
+        Sign in with Google
+    </a>
+    <br>
+
+    Already have an account?
+    <a href="{% url 'login' %}">Login</a>
+</p>
+
+
+
+</div>   
+
+</body>
+</html>

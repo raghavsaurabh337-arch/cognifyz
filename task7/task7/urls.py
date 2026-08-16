@@ -1,0 +1,58 @@
+# """
+# URL configuration for task4 project.
+
+# The `urlpatterns` list routes URLs to views. For more information please see:
+#     https://docs.djangoproject.com/en/5.2/topics/http/urls/
+# Examples:
+# Function views
+#     1. Add an import:  from my_app import views
+#     2. Add a URL to urlpatterns:  path('', views.home, name='home')
+# Class-based views
+#     1. Add an import:  from other_app.views import Home
+#     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+# Including another URLconf
+#     1. Import the include() function: from django.urls import include, path
+#     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+# """
+# from django.contrib import admin
+# from django.urls import path,include
+# from API import views
+# from API.views import GCrecode,RUDrecodeAPI
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', views.create_account, name='create_account'),
+#     path('login/', views.login, name='login'),
+#     path('home/', views.home, name='home'),
+#     path('view/', views.view, name='view'),
+#     path('API/recode/', GCrecode.as_view(), name='GCrecode'),
+#     path('api-auth/', include('rest_framework.urls')),
+#     path('API/recode/<int:pk>/', RUDrecodeAPI.as_view(), name='RUDrecode'),
+
+#     # // Oauth google
+#     path('accounts/', include('allauth.urls')),
+
+# ]
+
+
+from django.contrib import admin
+from django.urls import path, include
+from API import views
+from API.views import GCrecode, RUDrecodeAPI
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    path('', views.create_account, name='create_account'),
+    path('login/', views.login, name='login'),
+    path('home/', views.home, name='home'),
+    path('view/', views.view, name='view'),
+
+    path('API/recode/', GCrecode.as_view(), name='GCrecode'),
+    path('API/recode/<int:pk>/', RUDrecodeAPI.as_view(), name='RUDrecode'),
+
+    path('api-auth/', include('rest_framework.urls')),
+
+    # Google OAuth
+    path('accounts/', include('allauth.urls')),
+]
